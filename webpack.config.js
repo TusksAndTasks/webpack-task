@@ -33,6 +33,7 @@ const commonConfig = {
     plugins:[
         new HtmlWebpackPlugin({
             template: './src/index.html',
+            favicon: './src/assets/WS-Logo-Mono.svg',
             templateParameters: {
                 title: 'Webpack App',
                 description: 'Задание по webpack 5',
