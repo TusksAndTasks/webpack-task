@@ -1,5 +1,5 @@
 import React from 'react';
-import picture from './assets/main-picture.jpg';
+import picture from '../public/assets/images/main-picture.jpg';
 import './style.scss';
 
 class App extends React.Component{

@@ -4,7 +4,7 @@ const {merge} = require("webpack-merge");
 const commonConfig = {
     entry: './src/index.tsx',
     resolve: {
-        extensions: ['.js', '.tsx'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx' ],
     },
     module: {
         rules: [
@@ -22,18 +22,14 @@ const commonConfig = {
                 type: 'asset/resource',
             },
             {
-                test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+                test: /\.(woff(2)?|eot|ttf|otf|svg)$/,
                 type: 'asset/resource',
-                generator:{
-                    filename: '[name][ext]'
-                }
-            },
+            }
         ]
     },
     plugins:[
         new HtmlWebpackPlugin({
-            template: './src/index.html',
-            favicon: './src/assets/WS-Logo-Mono.svg',
+            template: './public/index.html',
             templateParameters: {
                 title: 'Webpack App',
                 description: 'Задание по webpack 5',

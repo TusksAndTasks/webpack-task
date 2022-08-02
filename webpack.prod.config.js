@@ -2,13 +2,22 @@ const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const path = require("path");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     mode: "production",
     devtool: false,
     output: {
-        path: path.join(__dirname, '/dist'),
-        filename: 'bundle.js'
+        path: path.join(__dirname, '/build'),
+        filename: 'bundle.js',
+        assetModuleFilename: (pathData) => {
+            const filepath = path
+                .dirname(pathData.filename)
+                .split("/")
+                .slice(1)
+                .join("/");
+            return `${filepath}/[name].[ext][query]`;
+        },
     },
     module: {
         rules: [
@@ -33,7 +42,12 @@ module.exports = {
                 filename: '[name].css'
             }
         ),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new CopyPlugin({
+            patterns: [
+                {from: 'public/assets/images/WS-Logo-Mono.svg', to: 'assets/images'}
+            ]
+        })
     ],
     performance: {
         hints: 'warning',
